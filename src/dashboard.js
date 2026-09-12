@@ -41,10 +41,43 @@ const list = document.querySelector('#scriptList')
 const status = document.querySelector('#scriptStatus')
 const hint = document.querySelector('.stage__hint')
 
-const loadExample = (path) => {
-    const next = new URL(window.location.href)
-    next.searchParams.set('script', path)
-    window.location.assign(next)
+const setSelectedButton = (path) => {
+    document.querySelectorAll('.script-button').forEach((button) => {
+        button.classList.toggle('is-active', button.dataset.path === path)
+    })
+}
+
+const resetPreview = () => {
+    document.querySelectorAll('.lil-gui').forEach((gui) => gui.remove())
+
+    const canvas = document.querySelector('.webgl')
+    canvas.replaceWith(canvas.cloneNode())
+}
+
+const loadExample = async (path, { updateUrl = true } = {}) => {
+    const name = allItems.find(([, itemPath]) => itemPath === path)?.[0]
+    if (!name) return
+
+    if (updateUrl) {
+        const next = new URL(window.location.href)
+        next.searchParams.set('script', path)
+        window.history.pushState({ script: path }, '', next)
+    }
+
+    setSelectedButton(path)
+    status.textContent = `Loading · ${name}`
+    hint.hidden = true
+    resetPreview()
+
+    try {
+        await loaders.get(path)?.()
+        status.textContent = `Loaded · ${name}`
+    } catch (error) {
+        console.error(error)
+        status.textContent = `Could not load · ${name}`
+        hint.textContent = 'Open the browser console for the module error.'
+        hint.hidden = false
+    }
 }
 
 for (const group of examples) {
@@ -66,20 +99,25 @@ for (const group of examples) {
     list.append(section)
 }
 
-if (selectedName) {
-    document.querySelector(`[data-path="${CSS.escape(selectedPath)}"]`)?.classList.add('is-active')
-    status.textContent = `Loaded · ${selectedName}`
-    hint.hidden = true
-    loaders.get(selectedPath)?.().catch((error) => {
-        console.error(error)
-        status.textContent = `Could not load · ${selectedName}`
-        hint.textContent = 'Open the browser console for the module error.'
-        hint.hidden = false
-    })
-}
+if (selectedName) loadExample(selectedPath, { updateUrl: false })
 
 document.querySelector('#clearScript').addEventListener('click', () => {
-    const next = new URL(window.location.href)
-    next.search = ''
-    window.location.assign(next)
+    window.history.pushState({}, '', window.location.pathname)
+    document.querySelectorAll('.script-button').forEach((button) => button.classList.remove('is-active'))
+    resetPreview()
+    status.textContent = 'No example selected'
+    hint.textContent = 'Select an example from the dashboard'
+    hint.hidden = false
+})
+
+window.addEventListener('popstate', () => {
+    const path = new URLSearchParams(window.location.search).get('script')
+    if (path) loadExample(path, { updateUrl: false })
+    else {
+        document.querySelectorAll('.script-button').forEach((button) => button.classList.remove('is-active'))
+        resetPreview()
+        status.textContent = 'No example selected'
+        hint.textContent = 'Select an example from the dashboard'
+        hint.hidden = false
+    }
 })
