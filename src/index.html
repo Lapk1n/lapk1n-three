@@ -3,27 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Three JS - Journey</title>
+    <title>Three JS — examples</title>
     <link rel="stylesheet" href="./style.css">
     <link rel="icon" href="/assets/logo.png" type="image/png">
 </head>
 <body>
-    <canvas class="webgl"></canvas>
-    <!-- <script type="module" src="./script.js"></script> -->
-    <!-- <script type="module" src="./basics/gui.js"></script> -->
-    <!-- <script type="module" src="./group.js"></script> -->
-    <!-- <script type="module" src="./animation.js"></script> -->
-    <!-- <script type="module" src="./camera.js"></script> -->
-    <!-- <script type="module" src="./fullscreen-resize.js"></script> -->
-    <!-- <script type="module" src="./textures.js"></script> -->
-    <!-- <script type="module" src="./basics/material.js"></script> -->
-    <!-- <script type="module" src="./text.js"></script> -->
-    <!-- <script type="module" src="./classic-technics/light.js"></script> -->
-    <!-- <script type="module" src="./classic-technics/shadows.js"></script> -->
-    <script type="module" src="./classic-technics/haunted-house.js"></script>
-    <!-- <script type="module" src="./classic-technics/particles.js"></script> -->
-    <!-- <script type="module" src="./classic-technics/galaxy-generator.js"></script> -->
-    <!-- <script type="module" src="./advanced-technics/physics.js"></script> -->
-    <!-- <script type="module" src="./advanced-technics/models.js"></script> -->
+    <aside class="dashboard" aria-label="Example dashboard">
+        <div class="dashboard__header">
+            <p class="eyebrow">Three.js journey</p>
+            <h1>Dashboard</h1>
+            <p class="dashboard__intro">Pick an experiment to load it into the canvas.</p>
+        </div>
+        <div id="scriptList" class="script-list"></div>
+        <div class="dashboard__footer">
+            <p id="scriptStatus" class="script-status" role="status">No example selected</p>
+            <button id="clearScript" class="clear-button" type="button">Clear preview</button>
+        </div>
+    </aside>
+    <main class="stage">
+        <canvas class="webgl"></canvas>
+        <div class="stage__hint">Select an example from the dashboard</div>
+    </main>
+    <script type="module" src="./dashboard.js"></script>
 </body>
 </html>
