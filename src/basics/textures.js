@@ -21,19 +21,18 @@ loadManager.onProgress = () => console.log('in progress')
 loadManager.onLoad = () => console.log('loaded')
 
 const loader = new THREE.TextureLoader(loadManager)
-const colorTexture = loader.load('/textures/minecraft.png')
-const alphaTexture = loader.load('/textures/door/alpha.jpg')
-const heightTexture = loader.load('/textures/door/height.jpg')
+// const colorTexture = loader.load('/textures/minecraft.png')
+// const alphaTexture = loader.load('/textures/door/alpha.jpg')
+// const heightTexture = loader.load('/textures/door/height.jpg')
 const normalTexture = loader.load('/textures/door/normal.jpg')
 
-colorTexture.magFilter = THREE.NearestFilter
+normalTexture.magFilter = THREE.NearestFilter
 // perfomance hint
-// colorTexture.generateMipmaps = false
+normalTexture.generateMipmaps = false
 
-// Red cube1
 const mesh1 = new THREE.Mesh(
     new THREE.BoxGeometry(1), 
-    new THREE.MeshBasicMaterial({ map: colorTexture })
+    new THREE.MeshBasicMaterial({ map: normalTexture })
 )
 scene.add(mesh1)
 
