@@ -40,6 +40,19 @@ const selectedName = allItems.find(([, path]) => path === selectedPath)?.[0]
 const list = document.querySelector('#scriptList')
 const status = document.querySelector('#scriptStatus')
 const hint = document.querySelector('.stage__hint')
+const dashboardToggle = document.querySelector('#dashboardToggle')
+const dashboardClose = document.querySelector('#dashboardClose')
+
+const setDashboardOpen = (isOpen) => {
+    document.body.classList.toggle('dashboard-open', isOpen)
+    dashboardToggle.setAttribute('aria-expanded', String(isOpen))
+}
+
+dashboardToggle.addEventListener('click', () => {
+    setDashboardOpen(!document.body.classList.contains('dashboard-open'))
+})
+
+dashboardClose.addEventListener('click', () => setDashboardOpen(false))
 
 const setSelectedButton = (path) => {
     document.querySelectorAll('.script-button').forEach((button) => {
@@ -65,6 +78,7 @@ const loadExample = async (path, { updateUrl = true } = {}) => {
     }
 
     setSelectedButton(path)
+    setDashboardOpen(false)
     status.textContent = `Loading · ${name}`
     hint.hidden = true
     resetPreview()
@@ -100,6 +114,7 @@ for (const group of examples) {
 }
 
 if (selectedName) loadExample(selectedPath, { updateUrl: false })
+else setDashboardOpen(true)
 
 document.querySelector('#clearScript').addEventListener('click', () => {
     window.history.pushState({}, '', window.location.pathname)

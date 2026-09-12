@@ -8,7 +8,12 @@
     <link rel="icon" href="/assets/logo.png" type="image/png">
 </head>
 <body>
-    <aside class="dashboard" aria-label="Example dashboard">
+    <button id="dashboardToggle" class="dashboard-toggle" type="button" aria-controls="dashboard" aria-expanded="true">
+        <span class="dashboard-toggle__icon" aria-hidden="true">☰</span>
+        <span class="dashboard-toggle__label">Menu</span>
+    </button>
+    <aside id="dashboard" class="dashboard" aria-label="Example dashboard">
+        <button id="dashboardClose" class="dashboard-close" type="button" aria-label="Close dashboard">×</button>
         <div class="dashboard__header">
             <p class="eyebrow">Three.js journey</p>
             <h1>Dashboard</h1>
