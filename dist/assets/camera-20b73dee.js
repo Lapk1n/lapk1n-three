@@ -1,0 +1,2 @@
+import{S as i,a as c,B as m,M as w,P as h,W as d}from"./three.module-d48fd967.js";import{O as l}from"./OrbitControls-0f0f0ead.js";const n=new i,p=new c(new m(1,1,1,5,5,5),new w({color:16711680,wireframe:!0}));n.add(p);const e={width:800,height:600},t=new h(75,e.width/e.height,.1,1e3);t.position.set(0,0,3);const s=document.querySelector(".webgl"),r=new d({canvas:s});r.setSize(e.width,e.height);const o=new l(t,s);o.enableDamping=!0;const a=()=>{o.update(),r.render(n,t),window.requestAnimationFrame(a)};a();
+//# sourceMappingURL=camera-20b73dee.js.map

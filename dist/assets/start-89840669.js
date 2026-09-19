@@ -1,0 +1,2 @@
+import{S as a,B as r,M as i,a as c,P as h,W as w}from"./three.module-d48fd967.js";const o=new a,m=new r(1,1,1),d=new i({color:16711680,wireframe:!0}),e=new c(m,d);e.scale.set(1.5,.5,1);e.rotation.set(0,Math.PI*.3,Math.PI*.25);e.position.set(0,.5,0);o.add(e);const t={width:800,height:600},s=new h(75,t.width/t.height);s.position.set(0,0,3);s.lookAt(e.position);const l=document.querySelector(".webgl"),n=new w({canvas:l});n.setSize(t.width,t.height);n.render(o,s);
+//# sourceMappingURL=start-89840669.js.map
