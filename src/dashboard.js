@@ -10,7 +10,7 @@ const examples = [
         ['Galaxy generator', './classic-technics/galaxy-generator.js'], ['Scroll-based animation', './classic-technics/scroll-based-animation.js'],
     ] },
     { title: 'Advanced technics', items: [
-        ['Physics', './advanced-technics/physics.js'], ['Models', './advanced-technics/models.js'],
+        ['Physics', './advanced-technics/physics.js'], ['Models', './advanced-technics/models.js'], ['Raycaster and mouse events', '/advanced-technics/raycaster_and_mouse_event.js']
     ] },
 ]
 
@@ -33,6 +33,7 @@ const loaders = new Map([
     ['./classic-technics/scroll-based-animation.js', () => import('./classic-technics/scroll-based-animation.js')],
     ['./advanced-technics/physics.js', () => import('./advanced-technics/physics.js')],
     ['./advanced-technics/models.js', () => import('./advanced-technics/models.js')],
+    ['/advanced-technics/raycaster_and_mouse_event.js', () => import('./advanced-technics/raycaster_and_mouse_event.js')]
 ])
 const params = new URLSearchParams(window.location.search)
 const selectedPath = params.get('script')
